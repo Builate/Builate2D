@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39bc0a1fd049a16449261decaf5b4db2, type: 3}
+  m_Name: Setting
+  m_EditorClassIdentifier: 
+  mapTiles:
+  - name: Empty
+    tilebase: {fileID: 11400000, guid: 473f0f8795381bc489cffe1a80f9f883, type: 2}
+  - name: Test
+    tilebase: {fileID: 11400000, guid: 29c6160866f26464c96df4d6b7cff546, type: 2}
+  - name: Ground
+    tilebase: {fileID: 11400000, guid: c12a28dc00466ff49baeff1cbd1a7f5e, type: 2}
+  chunkSize: {x: 10, y: 10}
