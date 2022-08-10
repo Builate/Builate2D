@@ -16,3 +16,4 @@ Buiateとはキャップによって開発されているキャップによる�
 コメントが可能なので指摘や提案などがあったらぜひお願いします。  
 [notion](https://kyapp.notion.site/Builate2D-eb3090c281a04d9bad178b4b09e94b1f)  
 [discord](https://discord.gg/jcX6JhSSkK)
+[Trello](https://trello.com/b/bEQENJqF/builate2d)
