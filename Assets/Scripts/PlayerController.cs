@@ -14,6 +14,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        rb2d.velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * speed;
+        transform.position += new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * speed * Time.deltaTime;
     }
 }

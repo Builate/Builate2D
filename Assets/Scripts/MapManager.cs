@@ -9,7 +9,6 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
     public Tilemap mapItemTilemap;
 
     public Dictionary<Vector2Int, Chunk> map = new Dictionary<Vector2Int, Chunk>();
-
     public Setting setting;
 
     void Start()
