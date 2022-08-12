@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb2d: {fileID: 146106737}
-  speed: 6
+  speed: 20
 --- !u!50 &146106737
 Rigidbody2D:
   serializedVersion: 4
@@ -681,6 +681,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapTilemap: {fileID: 75555775}
   mapItemTilemap: {fileID: 1025623061}
+  LoadedChunks: []
   setting: {fileID: 11400000, guid: ba49a68706d4d224d923aa89a897ea99, type: 2}
 --- !u!114 &849248128
 MonoBehaviour:
@@ -695,6 +696,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 146106732}
+  l_playerpos: {x: 0, y: 0}
+  setting: {fileID: 11400000, guid: ba49a68706d4d224d923aa89a897ea99, type: 2}
 --- !u!1 &994694655
 GameObject:
   m_ObjectHideFlags: 0

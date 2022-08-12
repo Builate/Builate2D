@@ -9,12 +9,12 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
     public Tilemap mapItemTilemap;
 
     public Dictionary<Vector2Int, Chunk> map = new Dictionary<Vector2Int, Chunk>();
+    public List<Vector2Int> LoadedChunks;
     public Setting setting;
 
     void Start()
     {
-        GenerateMap(new Vector2Int(0, 0));
-        SetTilemap(new Vector2Int(0, 0));
+
     }
 
     void Update()
@@ -32,11 +32,12 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
             {
                 for (int x = 0; x < setting.chunkSize.x; x++)
                 {
-                    chunk.data[x, y] = 2;
+                    chunk.data[x, y] = 3;
                 }
             }
 
             map.Add(chunkPosition, chunk);
+            LoadedChunks.Add(chunkPosition);
         }
     }
 
