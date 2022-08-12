@@ -18,8 +18,6 @@ MonoBehaviour:
   - name: Test
     tilebase: {fileID: 11400000, guid: 29c6160866f26464c96df4d6b7cff546, type: 2}
   - name: Ground
-    tilebase: {fileID: 11400000, guid: c12a28dc00466ff49baeff1cbd1a7f5e, type: 2}
-  - name: TestRandom
     tilebase: {fileID: 11400000, guid: 7c8a81a035b0d02458b827a268a50cd5, type: 2}
   chunkSize: {x: 10, y: 10}
   loadMapSize: {x: 5, y: 5}
