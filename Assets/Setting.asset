@@ -15,8 +15,6 @@ MonoBehaviour:
   mapTiles:
   - name: Empty
     tilebase: {fileID: 11400000, guid: 473f0f8795381bc489cffe1a80f9f883, type: 2}
-  - name: Test
-    tilebase: {fileID: 11400000, guid: 29c6160866f26464c96df4d6b7cff546, type: 2}
   - name: Ground
     tilebase: {fileID: 11400000, guid: 7c8a81a035b0d02458b827a268a50cd5, type: 2}
   chunkSize: {x: 10, y: 10}

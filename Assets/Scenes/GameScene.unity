@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 75555773}
   - component: {fileID: 75555775}
   - component: {fileID: 75555774}
+  - component: {fileID: 75555776}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -243,6 +244,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!19719996 &75555776
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75555772}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!1 &146106732
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,7 +377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb2d: {fileID: 146106737}
-  speed: 20
+  speed: 10
 --- !u!50 &146106737
 Rigidbody2D:
   serializedVersion: 4
