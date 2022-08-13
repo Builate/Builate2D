@@ -32,7 +32,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
             {
                 for (int x = 0; x < setting.chunkSize.x; x++)
                 {
-                    chunk.data[x, y] = 1;
+                    chunk.data[x, y] = 0;
                 }
             }
 
