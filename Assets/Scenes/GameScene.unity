@@ -340,7 +340,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146106732}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.18, y: -1.67, z: 0}
+  m_LocalPosition: {x: 1.77, y: 1.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -698,6 +698,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapTilemap: {fileID: 75555775}
   mapItemTilemap: {fileID: 1025623061}
+  mapCollider2D: {fileID: 75555776}
+  mapItemCollider2D: {fileID: 1025623062}
   LoadedChunks: []
   setting: {fileID: 11400000, guid: ba49a68706d4d224d923aa89a897ea99, type: 2}
 --- !u!114 &849248128
@@ -772,6 +774,7 @@ GameObject:
   - component: {fileID: 1025623059}
   - component: {fileID: 1025623061}
   - component: {fileID: 1025623060}
+  - component: {fileID: 1025623062}
   m_Layer: 0
   m_Name: MapItem
   m_TagString: Untagged
@@ -881,3 +884,19 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!19719996 &1025623062
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025623058}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001

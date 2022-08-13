@@ -19,6 +19,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     void Update()
     {
+        // ‰½‚à‚È‚¢êŠ‚É‚à“–‚½‚è”»’è‚ğ•t‚¯‚é‚½‚ß‚É•K—v
         if (GetChunkPosition(Player.transform.position) != l_playerpos)
         {
             Vector2Int PlayerChunkPosition = GetChunkPosition(Player.transform.position);
@@ -28,10 +29,20 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 for (int x = 0; x < setting.loadMapSize.x; x++)
                 {
                     Vector2Int locpos = new Vector2Int(x - setting.loadMapSize.x / 2, y - setting.loadMapSize.y / 2);
-                    MapManager.Instance.GenerateMap(PlayerChunkPosition + locpos);
+                    MapManager.Instance.GenerateMap(PlayerChunkPosition + locpos, 0);
                     MapManager.Instance.SetTilemap(PlayerChunkPosition + locpos);
                 }
             }
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector2Int cursorChunkPosition = GetChunkPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
+            Debug.Log(cursorChunkPosition);
+
+            MapManager.Instance.FillMap(cursorChunkPosition, 1);
+            MapManager.Instance.SetTilemap(cursorChunkPosition);
         }
 
         l_playerpos = GetChunkPosition(Player.transform.position);
