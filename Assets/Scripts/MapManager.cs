@@ -22,7 +22,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
 
     }
 
-    public void GenerateMap(Vector2Int chunkPosition)
+    public void GenerateMap(Vector2Int chunkPosition, int t = 0)
     {
         if (!map.ContainsKey(chunkPosition))
         {
@@ -32,7 +32,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
             {
                 for (int x = 0; x < setting.chunkSize.x; x++)
                 {
-                    chunk.data[x, y] = 0;
+                    chunk.data[x, y] = t;
                 }
             }
 
