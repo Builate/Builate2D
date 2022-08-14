@@ -49,6 +49,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         {
             SaveManager.Instance.Save();
         }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            SaveManager.Instance.Load();
+        }
 
         l_playerpos = GetChunkPosition(Player.transform.position);
     }
