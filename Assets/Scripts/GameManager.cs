@@ -35,7 +35,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             }
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             Vector2Int cursorChunkPosition = GetChunkPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
