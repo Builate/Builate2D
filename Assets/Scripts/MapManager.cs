@@ -15,7 +15,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
 
     void Start()
     {
-
+        SaveManager.Instance.Load();
     }
 
     void Update()
@@ -49,7 +49,6 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
         {
             for (int x = 0; x < setting.chunkSize.x; x++)
             {
-                Debug.Log(t);
                 chunk.data[x, y] = t;
             }
         }
@@ -70,5 +69,10 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
                 PolygonCollider2D collider = new PolygonCollider2D();
             }
         }
+    }
+
+    public void OnDestroy()
+    {
+        SaveManager.Instance.Save();
     }
 }

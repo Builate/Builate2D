@@ -94,10 +94,21 @@ using UnityEngine;
             data.AddRange(BitConverter.GetBytes(value.x));
             data.AddRange(BitConverter.GetBytes(value.y));
         }
-        #endregion
+        public void Put(Vector3Int value)
+        {
+            data.AddRange(BitConverter.GetBytes(value.x));
+            data.AddRange(BitConverter.GetBytes(value.y));
+            data.AddRange(BitConverter.GetBytes(value.z));
+        }
+        public void Put(Vector2Int value)
+        {
+            data.AddRange(BitConverter.GetBytes(value.x));
+            data.AddRange(BitConverter.GetBytes(value.y));
+        }
+    #endregion
 
-        #region Util
-        public void Put(byte[] value)
+    #region Util
+    public void Put(byte[] value)
         {
             Put(value.Length);
             data.AddRange(value);
