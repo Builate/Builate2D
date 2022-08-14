@@ -45,6 +45,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             MapManager.Instance.SetTilemap(cursorChunkPosition);
         }
 
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SaveManager.Instance.Save();
+        }
+
         l_playerpos = GetChunkPosition(Player.transform.position);
     }
 
