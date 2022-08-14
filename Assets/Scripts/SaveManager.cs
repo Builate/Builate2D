@@ -11,8 +11,9 @@ public class SaveManager : SingletonMonoBehaviour<SaveManager>
         string FilePath = Path.Combine(FolderPath, "testworld.builate");
         DataWriter dataWriter = new DataWriter();
 
-        //シリアライズ処理
+        #region シリアライズ処理
 
+        #endregion
 
         File.WriteAllBytes(FilePath, dataWriter.GetData());
     }
@@ -24,6 +25,8 @@ public class SaveManager : SingletonMonoBehaviour<SaveManager>
         byte[] data = File.ReadAllBytes(FilePath);
         DataReader dataReader = new DataReader(data);
 
-        //デシリアアライズ処理
+        #region デシリアライズ処理
+
+        #endregion
     }
 }
