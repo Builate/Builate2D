@@ -15,7 +15,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
 
     void Start()
     {
-        SaveManager.Instance.Load();
+
     }
 
     void Update()
@@ -69,10 +69,5 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
                 PolygonCollider2D collider = new PolygonCollider2D();
             }
         }
-    }
-
-    public void OnDestroy()
-    {
-        SaveManager.Instance.Save();
     }
 }

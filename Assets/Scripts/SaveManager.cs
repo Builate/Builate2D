@@ -21,9 +21,12 @@ public class SaveManager : SingletonMonoBehaviour<SaveManager>
         // チャンク数の数だけ繰り返す
         for (int i = 0; i < chunksCount; i++)
         {
-            Vector2Int key = MapManager.Instance.map.Keys.ToArray()[i];
             // キー
-            dataWriter.Put(key.x);
+            Vector2Int key = MapManager.Instance.map.Keys.ToArray()[i];
+            dataWriter.Put(key);
+
+            // 各チャンクのセーブ処理
+            MapManager.Instance.map[key].Writer(dataWriter);
         }
         #endregion
 
@@ -42,7 +45,17 @@ public class SaveManager : SingletonMonoBehaviour<SaveManager>
         GameManager.Instance.Player.transform.position = dataReader.GetVector3();
         // チャンク数
         int chunksCount = dataReader.GetInt();
+        // チャンク数の数だけ繰り返す
+        for (int i = 0; i < chunksCount; i++)
+        {
+            // キー
+            Vector2Int key = dataReader.GetVector2Int();
 
+            // 各チャンクのロード処理
+            Chunk chunk = new Chunk();
+            chunk.Reader(dataReader);
+            MapManager.Instance.map[key] = chunk;
+        }
         #endregion
     }
 }

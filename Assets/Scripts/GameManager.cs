@@ -11,6 +11,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     void Start()
     {
+        SaveManager.Instance.Load();
+
         Vector2Int PlayerChunkPosition = GetChunkPosition(Player.transform.position);
 
         MapManager.Instance.GenerateMap(PlayerChunkPosition, 1);
@@ -38,8 +40,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         if (Input.GetMouseButton(0))
         {
             Vector2Int cursorChunkPosition = GetChunkPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-
-            Debug.Log(cursorChunkPosition);
 
             MapManager.Instance.FillMap(cursorChunkPosition, 1);
             MapManager.Instance.SetTilemap(cursorChunkPosition);
