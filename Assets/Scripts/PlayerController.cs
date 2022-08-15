@@ -27,6 +27,5 @@ public class PlayerController : MonoBehaviour
         }
 
         animator.SetBool("isWalk", rb2d.velocity != Vector2.zero);
-        Debug.Log(animator.GetBool("isWalk"));
     }
 }

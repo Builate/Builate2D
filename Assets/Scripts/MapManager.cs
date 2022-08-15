@@ -7,7 +7,6 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
 {
     public Tilemap mapTilemap;
     public Tilemap mapItemTilemap;
-    public TilemapCollider2D mapCollider;
 
     public Dictionary<Vector2Int, Chunk> map = new Dictionary<Vector2Int, Chunk>();
     public List<Vector2Int> LoadedChunks;
@@ -49,7 +48,8 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
         {
             for (int x = 0; x < setting.chunkSize.x; x++)
             {
-                chunk.data[x, y] = t;
+                chunk.mapdata[x, y] = t;
+                chunk.mapitemdata[x, y] = 0;
             }
         }
 
@@ -64,7 +64,8 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
             for (int x = 0; x < setting.chunkSize.x; x++)
             {
                 Vector3Int pos = new Vector3Int(x, y) + new Vector3Int(chunkPosition.x * setting.chunkSize.x, chunkPosition.y * setting.chunkSize.y);
-                mapTilemap.SetTile(pos, setting.mapTiles[map[chunkPosition].data[x, y]].tilebase);
+                mapTilemap.SetTile(pos, setting.mapTiles[map[chunkPosition].mapdata[x, y]].tilebase);
+                mapItemTilemap.SetTile(pos, setting.mapItemTiles[map[chunkPosition].mapitemdata[x, y]].tilebase);
 
                 PolygonCollider2D collider = new PolygonCollider2D();
             }
