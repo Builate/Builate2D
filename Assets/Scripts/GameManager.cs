@@ -15,7 +15,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
         Vector2Int PlayerChunkPosition = GetChunkPosition(Player.transform.position);
 
-        MapManager.Instance.GenerateMap(PlayerChunkPosition, 1);
+        MapManager.Instance.GetMap(PlayerChunkPosition, 1);
         MapManager.Instance.SetTilemap(PlayerChunkPosition);
     }
 
@@ -31,7 +31,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 for (int x = 0; x < setting.loadMapSize.x; x++)
                 {
                     Vector2Int locpos = new Vector2Int(x - setting.loadMapSize.x / 2, y - setting.loadMapSize.y / 2);
-                    MapManager.Instance.GenerateMap(PlayerChunkPosition + locpos, 0);
+                    MapManager.Instance.GetMap(PlayerChunkPosition + locpos, 0);
                     MapManager.Instance.SetTilemap(PlayerChunkPosition + locpos);
                 }
             }
@@ -41,8 +41,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         {
             Vector2Int cursorChunkPosition = GetChunkPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
-            MapManager.Instance.FillMap(cursorChunkPosition, 1);
+            MapManager.Instance.FillChunk(cursorChunkPosition, 1);
             MapManager.Instance.SetTilemap(cursorChunkPosition);
+        }
+
+        if (Input.GetMouseButton(1))
+        {
+            MapManager.Instance.SetTile(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0, 0);
         }
 
         if (Input.GetKeyDown(KeyCode.P))

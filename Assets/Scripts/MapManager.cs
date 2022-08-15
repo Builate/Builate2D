@@ -27,12 +27,14 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
     /// </summary>
     /// <param name="chunkPosition"></param>
     /// <param name="t"></param>
-    public void GenerateMap(Vector2Int chunkPosition, int t = 0)
+    public Chunk GetMap(Vector2Int chunkPosition, int t = 0)
     {
         if (!map.ContainsKey(chunkPosition))
         {
-            FillMap(chunkPosition, t);
+            FillChunk(chunkPosition, t);
         }
+
+        return map[chunkPosition];
     }
 
     /// <summary>
@@ -40,7 +42,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
     /// </summary>
     /// <param name="chunkPosition"></param>
     /// <param name="t"></param>
-    public void FillMap(Vector2Int chunkPosition, int t = 0)
+    public Chunk FillChunk(Vector2Int chunkPosition, int t = 0)
     {
         Chunk chunk = new Chunk();
 
@@ -55,6 +57,35 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
 
         map[chunkPosition] = chunk;
         if (!LoadedChunks.Contains(chunkPosition)) LoadedChunks.Add(chunkPosition);
+
+        return chunk;
+    }
+
+    /// <summary>
+    /// 指定したレイヤーにブロックを設置します。
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <param name="layer"></param>
+    /// <param name="id"></param>
+    public void SetTile(Vector3 pos, int layer, int id)
+    {
+        Vector2Int chunkPos = GameManager.Instance.GetChunkPosition(new Vector3(pos.x, pos.y));
+        Vector2Int tilePos = new Vector2Int(Mathf.FloorToInt(pos.x) - chunkPos.x * GameManager.Instance.setting.chunkSize.x, Mathf.FloorToInt(pos.y) - chunkPos.y * GameManager.Instance.setting.chunkSize.y);
+        Chunk chunk = GetMap(chunkPos);
+
+        switch (layer)
+        {
+            case 0:
+                chunk.mapdata[tilePos.x, tilePos.y] = id;
+                break;
+            case 1:
+                chunk.mapitemdata[tilePos.x, tilePos.y] = id;
+                break;
+            default:
+                break;
+        }
+
+        SetTilemap(chunkPos, tilePos);
     }
 
     public void SetTilemap(Vector2Int chunkPosition)
@@ -63,12 +94,15 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
         {
             for (int x = 0; x < setting.chunkSize.x; x++)
             {
-                Vector3Int pos = new Vector3Int(x, y) + new Vector3Int(chunkPosition.x * setting.chunkSize.x, chunkPosition.y * setting.chunkSize.y);
-                mapTilemap.SetTile(pos, setting.mapTiles[map[chunkPosition].mapdata[x, y]].tilebase);
-                mapItemTilemap.SetTile(pos, setting.mapItemTiles[map[chunkPosition].mapitemdata[x, y]].tilebase);
-
-                PolygonCollider2D collider = new PolygonCollider2D();
+                SetTilemap(chunkPosition, new Vector2Int(x, y));
             }
         }
+    }
+
+    public void SetTilemap(Vector2Int chunkPosition, Vector2Int tilePosition)
+    {
+        Vector3Int pos = new Vector3Int(tilePosition.x, tilePosition.y) + new Vector3Int(chunkPosition.x * setting.chunkSize.x, chunkPosition.y * setting.chunkSize.y);
+        mapTilemap.SetTile(pos, setting.mapTiles[map[chunkPosition].mapdata[tilePosition.x, tilePosition.y]].tilebase);
+        mapItemTilemap.SetTile(pos, setting.mapItemTiles[map[chunkPosition].mapitemdata[tilePosition.x, tilePosition.y]].tilebase);
     }
 }
