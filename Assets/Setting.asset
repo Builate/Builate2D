@@ -20,5 +20,7 @@ MonoBehaviour:
   mapItemTiles:
   - name: Empty
     tilebase: {fileID: 11400000, guid: 2fe9d797778887e4f856a4ea18771981, type: 2}
+  - name: Rock
+    tilebase: {fileID: 11400000, guid: 70de932cff0d4304c9508b85b0da4467, type: 2}
   chunkSize: {x: 3, y: 3}
   loadMapSize: {x: 5, y: 5}

@@ -47,7 +47,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
         if (Input.GetMouseButton(1))
         {
-            MapManager.Instance.SetTile(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0, 0);
+            MapManager.Instance.SetTile(Camera.main.ScreenToWorldPoint(Input.mousePosition), 1, 1);
         }
 
         if (Input.GetKeyDown(KeyCode.P))
