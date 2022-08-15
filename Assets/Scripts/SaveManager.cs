@@ -55,6 +55,7 @@ public class SaveManager : SingletonMonoBehaviour<SaveManager>
             Chunk chunk = new Chunk();
             chunk.Reader(dataReader);
             MapManager.Instance.map[key] = chunk;
+            MapManager.Instance.SetTilemap(key);
         }
         #endregion
     }
