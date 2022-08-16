@@ -103,6 +103,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
     {
         Vector3Int pos = new Vector3Int(tilePosition.x, tilePosition.y) + new Vector3Int(chunkPosition.x * setting.chunkSize.x, chunkPosition.y * setting.chunkSize.y);
         mapTilemap.SetTile(pos, setting.mapTiles[map[chunkPosition].mapdata[tilePosition.x, tilePosition.y]].tilebase);
-        mapItemTilemap.SetTile(pos, setting.mapItemTiles[map[chunkPosition].mapitemdata[tilePosition.x, tilePosition.y]].tilebase);
+        int tileid = map[chunkPosition].mapitemdata[tilePosition.x, tilePosition.y];
+        mapItemTilemap.SetTile(pos, setting.mapItemTiles[tileid].tilebase);
     }
 }

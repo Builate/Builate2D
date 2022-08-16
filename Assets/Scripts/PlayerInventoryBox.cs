@@ -1,17 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class PlayerInventoryBox : InventoryBox
 {
-    public (int id, int quantity)[] items = new (int id, int quantity)[9];
-
-
+    public InventoryTile[] items = new InventoryTile[9];
 
     public override bool PeekItem(int index, out int itemid, out int itemquantity)
     {
-        itemid = -1;
-        itemquantity = -1;
+        itemid = 0;
+        itemquantity = 0;
 
         // index‚ª”ÍˆÍŠO‚Ìê‡return‚·‚é
         if (items.Length < index || 0 > index) return false;
@@ -23,7 +23,7 @@ public class PlayerInventoryBox : InventoryBox
 
     public override bool GetItem(int index, out int itemid)
     {
-        itemid = -1;
+        itemid = 0;
 
         // index‚ª”ÍˆÍŠO‚Ìê‡return‚·‚é
         if (items.Length < index || 0 > index) return false;
@@ -35,7 +35,7 @@ public class PlayerInventoryBox : InventoryBox
         items[index].quantity--;
         itemid = items[index].id;
 
-        if (items[index].quantity == 0) items[index].id = -1;
+        if (items[index].quantity == 0) items[index].id = 0;
         return true;
     }
 
