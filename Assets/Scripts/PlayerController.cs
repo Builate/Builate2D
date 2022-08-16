@@ -51,9 +51,12 @@ public class PlayerController : MonoBehaviour
             {
                 if (chunk.mapitemdata[tilepos.x,tilepos.y] == 0)
                 {
-                    if (inventoryBox.GetItem(handIndex, out int itemid))
+                    if (chunk.mapdata[tilepos.x,tilepos.y] != 0)
                     {
-                        MapManager.Instance.SetTile(mousePos, 1, itemid);
+                        if (inventoryBox.GetItem(handIndex, out int itemid))
+                        {
+                            MapManager.Instance.SetTile(mousePos, 1, itemid);
+                        }
                     }
                 }
             }
