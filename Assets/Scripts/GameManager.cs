@@ -37,28 +37,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             }
         }
 
-        if (Input.GetMouseButton(0))
-        {
-            Vector2Int cursorChunkPosition = GetChunkPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-
-            MapManager.Instance.FillChunk(cursorChunkPosition, 1);
-            MapManager.Instance.SetTilemap(cursorChunkPosition);
-        }
-
-        if (Input.GetMouseButton(1))
-        {
-            MapManager.Instance.SetTile(Camera.main.ScreenToWorldPoint(Input.mousePosition), 1, 1);
-        }
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            SaveManager.Instance.Save();
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            SaveManager.Instance.Load();
-        }
-
         l_playerpos = GetChunkPosition(Player.transform.position);
     }
 

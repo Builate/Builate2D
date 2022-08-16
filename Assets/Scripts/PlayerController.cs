@@ -7,10 +7,12 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb2d;
     public Animator animator;
     public float speed;
+    public PlayerInventoryBox inventoryBox = new PlayerInventoryBox();
+    public int handIndex;
 
     void Start()
     {
-        
+        inventoryBox.AddItem(0, 1);
     }
 
     void Update()
@@ -27,5 +29,31 @@ public class PlayerController : MonoBehaviour
         }
 
         animator.SetBool("isWalk", rb2d.velocity != Vector2.zero);
+
+
+        if (Input.GetMouseButton(0))
+        {
+            Vector2Int cursorChunkPosition = GameManager.Instance.GetChunkPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
+            MapManager.Instance.FillChunk(cursorChunkPosition, 1);
+            MapManager.Instance.SetTilemap(cursorChunkPosition);
+        }
+
+        if (Input.GetMouseButton(1))
+        {
+            if (inventoryBox.GetItem(handIndex, out int itemid))
+            {
+                MapManager.Instance.SetTile(Camera.main.ScreenToWorldPoint(Input.mousePosition), 1, itemid);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SaveManager.Instance.Save();
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            SaveManager.Instance.Load();
+        }
     }
 }
