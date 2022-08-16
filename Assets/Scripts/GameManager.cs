@@ -44,4 +44,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         return new Vector2Int(Mathf.FloorToInt(position.x / setting.chunkSize.x), Mathf.FloorToInt(position.y / setting.chunkSize.y));
     }
+
+    public Vector2Int GetTilePosition(Vector3 pos)
+    {
+        Vector2Int chunkPos = GetChunkPosition(pos);
+        return new Vector2Int(Mathf.FloorToInt(pos.x) - chunkPos.x * GameManager.Instance.setting.chunkSize.x, Mathf.FloorToInt(pos.y) - chunkPos.y * GameManager.Instance.setting.chunkSize.y);
+    }
 }

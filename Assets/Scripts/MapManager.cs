@@ -70,7 +70,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
     public void SetTile(Vector3 pos, int layer, int id)
     {
         Vector2Int chunkPos = GameManager.Instance.GetChunkPosition(new Vector3(pos.x, pos.y));
-        Vector2Int tilePos = new Vector2Int(Mathf.FloorToInt(pos.x) - chunkPos.x * GameManager.Instance.setting.chunkSize.x, Mathf.FloorToInt(pos.y) - chunkPos.y * GameManager.Instance.setting.chunkSize.y);
+        Vector2Int tilePos = GameManager.Instance.GetTilePosition(pos);
         Chunk chunk = GetMap(chunkPos);
 
         switch (layer)

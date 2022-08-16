@@ -42,11 +42,20 @@ public class PlayerController : MonoBehaviour
             MapManager.Instance.SetTilemap(cursorChunkPosition);
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButton(1))
         {
-            if (inventoryBox.GetItem(handIndex, out int itemid))
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2Int tilepos = GameManager.Instance.GetTilePosition(mousePos);
+
+            if (MapManager.Instance.map.TryGetValue(GameManager.Instance.GetChunkPosition(mousePos), out Chunk chunk))
             {
-                MapManager.Instance.SetTile(Camera.main.ScreenToWorldPoint(Input.mousePosition), 1, itemid);
+                if (chunk.mapitemdata[tilepos.x,tilepos.y] == 0)
+                {
+                    if (inventoryBox.GetItem(handIndex, out int itemid))
+                    {
+                        MapManager.Instance.SetTile(mousePos, 1, itemid);
+                    }
+                }
             }
         }
 
