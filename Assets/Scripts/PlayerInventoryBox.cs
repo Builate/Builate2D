@@ -36,7 +36,6 @@ public class PlayerInventoryBox : InventoryBox
         itemid = items[index].id;
 
         if (items[index].quantity == 0) items[index].id = -1;
-
         return true;
     }
 

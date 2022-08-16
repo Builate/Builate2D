@@ -12,7 +12,10 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        inventoryBox.AddItem(0, 1);
+        for (int i = 0; i < 3; i++)
+        {
+            inventoryBox.AddItem(handIndex, 1);
+        }
     }
 
     void Update()
@@ -39,7 +42,7 @@ public class PlayerController : MonoBehaviour
             MapManager.Instance.SetTilemap(cursorChunkPosition);
         }
 
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButtonDown(1))
         {
             if (inventoryBox.GetItem(handIndex, out int itemid))
             {
