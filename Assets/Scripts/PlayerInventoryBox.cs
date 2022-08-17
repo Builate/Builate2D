@@ -56,4 +56,26 @@ public class PlayerInventoryBox : InventoryBox
         onChange();
         return true;
     }
+
+    public override void Writer(DataWriter writer)
+    {
+        writer.Put(items.Length);
+        for (int i = 0; i < items.Length; i++)
+        {
+            items[i].Writer(writer);
+        }
+
+        onChange();
+    }
+
+    public override void Reader(DataReader reader)
+    {
+        int count = reader.GetInt();
+        for (int i = 0; i < count; i++)
+        {
+            items[i].Reader(reader);
+        }
+
+        onChange();
+    }
 }

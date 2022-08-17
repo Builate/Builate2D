@@ -9,4 +9,8 @@ public abstract class InventoryBox
     public abstract bool GetItem(int index, out int itemid);
 
     public abstract bool AddItem(int index, int itemid);
+
+    public abstract void Writer(DataWriter writer);
+
+    public abstract void Reader(DataReader reader);
 }

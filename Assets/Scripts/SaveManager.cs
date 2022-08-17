@@ -15,6 +15,8 @@ public class SaveManager : SingletonMonoBehaviour<SaveManager>
         #region シリアライズ処理
         // プレイヤーの位置
         dataWriter.Put(GameManager.Instance.Player.transform.position);
+        // プレイヤーのインベントリ
+        Player.Instance.inventoryBox.Writer(dataWriter);
         // チャンク数
         int chunksCount = MapManager.Instance.map.Count;
         dataWriter.Put(chunksCount);
@@ -43,6 +45,8 @@ public class SaveManager : SingletonMonoBehaviour<SaveManager>
         #region デシリアライズ処理
         // プレイヤーの位置
         GameManager.Instance.Player.transform.position = dataReader.GetVector3();
+        // プレイヤーのインベントリ
+        Player.Instance.inventoryBox.Reader(dataReader);
         // チャンク数
         int chunksCount = dataReader.GetInt();
         // チャンク数の数だけ繰り返す

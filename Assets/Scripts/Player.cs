@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class Player : SingletonMonoBehaviour<Player>
 {
     public Rigidbody2D rb2d;
     public Animator animator;
@@ -31,13 +31,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
         };
-
-
-        for (int i = 0; i < 300; i++)
-        {
-            inventoryBox.AddItem(0, 1);
-            inventoryBox.AddItem(6, 1);
-        }
     }
 
     void Update()
