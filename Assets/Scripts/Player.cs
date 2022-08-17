@@ -67,20 +67,13 @@ public class Player : SingletonMonoBehaviour<Player>
 
         if (Input.GetMouseButton(1))
         {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2Int tilepos = GameManager.Instance.GetTilePosition(mousePos);
-
-            if (MapManager.Instance.map.TryGetValue(GameManager.Instance.GetChunkPosition(mousePos), out Chunk chunk))
+            if (inventoryBox.PeekItem(handIndex, out int itemid, out int itemquantity))
             {
-                if (chunk.mapitemdata[tilepos.x,tilepos.y] == 0)
+                var mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                
+                if (MapManager.Instance.DestroyTile(itemid, mousepos))
                 {
-                    if (chunk.mapdata[tilepos.x,tilepos.y] != 0)
-                    {
-                        if (inventoryBox.GetItem(handIndex, out int itemid))
-                        {
-                            MapManager.Instance.SetTile(mousePos, 1, itemid);
-                        }
-                    }
+                    inventoryBox.GetItem(handIndex, out itemid);
                 }
             }
         }

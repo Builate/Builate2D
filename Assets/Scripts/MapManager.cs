@@ -106,4 +106,23 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
         int tileid = map[chunkPosition].mapitemdata[tilePosition.x, tilePosition.y];
         mapItemTilemap.SetTile(pos, setting.mapItemTiles[tileid].tilebase);
     }
+
+    public bool DestroyTile(int itemid, Vector3 position)
+    {
+        Vector2Int tilepos = GameManager.Instance.GetTilePosition(position);
+
+        if (MapManager.Instance.map.TryGetValue(GameManager.Instance.GetChunkPosition(position), out Chunk chunk))
+        {
+            if (chunk.mapitemdata[tilepos.x, tilepos.y] == 0)
+            {
+                if (chunk.mapdata[tilepos.x, tilepos.y] != 0)
+                {
+                    MapManager.Instance.SetTile(position, 1, itemid);
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 }
