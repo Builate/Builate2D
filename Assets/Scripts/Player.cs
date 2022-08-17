@@ -35,6 +35,8 @@ public class Player : SingletonMonoBehaviour<Player>
 
     void Update()
     {
+        animator.SetBool("isWalk", rb2d.velocity != Vector2.zero);
+
         rb2d.velocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * speed;
 
         if (rb2d.velocity.x < 0)
@@ -45,8 +47,6 @@ public class Player : SingletonMonoBehaviour<Player>
         {
             transform.localScale = new Vector3(-1, 1, 0);
         }
-
-        animator.SetBool("isWalk", rb2d.velocity != Vector2.zero);
 
         for (int i = 0; i < 9; i++)
         {
