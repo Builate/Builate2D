@@ -71,38 +71,26 @@ public class Player : SingletonMonoBehaviour<Player>
 
     public void SetMoveDirection()
     {
-        if (rb2d.velocity.y < 0)
+        Vector2 velo = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+        if (velo.y < 0)
         {
             moveDirection.y = -1;
-
-            if (rb2d.velocity.x == 0)
-            {
-                moveDirection.x = 0;
-            }
         }
-        else if (rb2d.velocity.y > 0)
+        else if (velo.y > 0)
         {
             moveDirection.y = 1;
-
-            if (rb2d.velocity.x == 0)
-            {
-                moveDirection.x = 0;
-            }
         }
 
-        if (rb2d.velocity.x < 0)
+        if (velo.x < 0)
         {
             transform.localScale = new Vector3(1, 1, 0);
             moveDirection.x = -1;
-
-            moveDirection.y = 0;
         }
-        else if (rb2d.velocity.x > 0)
+        else if (velo.x > 0)
         {
             transform.localScale = new Vector3(-1, 1, 0);
             moveDirection.x = 1;
-
-            moveDirection.y = 0;
         }
     }
 
@@ -110,9 +98,11 @@ public class Player : SingletonMonoBehaviour<Player>
     {
         cursorDirection = moveDirection;
 
-        if (MapManager.Instance.map.TryGetValue(GameManager.Instance.GetChunkPosition(transform.position), out Chunk chunk))
+        Vector2 playerPos = transform.position;
+
+        if (MapManager.Instance.map.TryGetValue(GameManager.Instance.GetChunkPosition(playerPos), out Chunk chunk))
         {
-            Vector2Int pos = GameManager.Instance.GetTilePosition(transform.position + new Vector3(0, 0.5f, 0));
+            Vector2Int pos = GameManager.Instance.GetTilePosition(playerPos);
 
             //コライダーを持っているなら
             if (GameManager.Instance.setting.mapItemTiles[chunk.mapitemdata[pos.x, pos.y]].hasCollider)
