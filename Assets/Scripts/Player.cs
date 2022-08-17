@@ -50,8 +50,7 @@ public class Player : SingletonMonoBehaviour<Player>
 
         if (Input.GetMouseButton(0))
         {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2Int tilepos = GameManager.Instance.GetTilePosition(mousePos);
+            Vector2 mousePos = (Vector2)transform.position + moveDirection;
 
             if (MapManager.Instance.map.TryGetValue(GameManager.Instance.GetChunkPosition(mousePos), out Chunk chunk))
             {
@@ -63,9 +62,9 @@ public class Player : SingletonMonoBehaviour<Player>
         {
             if (inventoryBox.PeekItem(handIndex, out int itemid, out int itemquantity))
             {
-                var mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                
-                if (MapManager.Instance.DestroyTile(itemid, mousepos))
+                var tilepos = (Vector2)transform.position + moveDirection;
+
+                if (MapManager.Instance.DestroyTile(itemid, tilepos))
                 {
                     inventoryBox.GetItem(handIndex, out itemid);
                 }
@@ -107,21 +106,15 @@ public class Player : SingletonMonoBehaviour<Player>
         {
             transform.localScale = new Vector3(1, 1, 0);
             moveDirection.x = -1;
-            
-            if (rb2d.velocity.y == 0)
-            {
-                moveDirection.y = 0;
-            }
+
+            moveDirection.y = 0;
         }
         else if (rb2d.velocity.x > 0)
         {
             transform.localScale = new Vector3(-1, 1, 0);
             moveDirection.x = 1;
 
-            if (rb2d.velocity.y == 0)
-            {
-                moveDirection.y = 0;
-            }
+            moveDirection.y = 0;
         }
     }
 }
