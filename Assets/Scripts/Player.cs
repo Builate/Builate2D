@@ -10,6 +10,7 @@ public class Player : SingletonMonoBehaviour<Player>
     public PlayerInventoryBox inventoryBox = new PlayerInventoryBox();
     public InventorySlot[] inventorySlots = new InventorySlot[9]; 
     public int handIndex;
+    public Vector2Int moveDirection;
 
     void Start()
     {
@@ -39,14 +40,7 @@ public class Player : SingletonMonoBehaviour<Player>
 
         rb2d.velocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * speed;
 
-        if (rb2d.velocity.x < 0)
-        {
-            transform.localScale = new Vector3(1, 1, 0);
-        }
-        else if(rb2d.velocity.x > 0)
-        {
-            transform.localScale = new Vector3(-1, 1, 0);
-        }
+        SetMoveDirection();
 
         for (int i = 0; i < 9; i++)
         {
@@ -85,6 +79,49 @@ public class Player : SingletonMonoBehaviour<Player>
         if (Input.GetKeyDown(KeyCode.L))
         {
             SaveManager.Instance.Load();
+        }
+    }
+
+    public void SetMoveDirection()
+    {
+        if (rb2d.velocity.y < 0)
+        {
+            moveDirection.y = -1;
+
+            if (rb2d.velocity.x == 0)
+            {
+                moveDirection.x = 0;
+            }
+        }
+        else if (rb2d.velocity.y > 0)
+        {
+            moveDirection.y = 1;
+
+            if (rb2d.velocity.x == 0)
+            {
+                moveDirection.x = 0;
+            }
+        }
+
+        if (rb2d.velocity.x < 0)
+        {
+            transform.localScale = new Vector3(1, 1, 0);
+            moveDirection.x = -1;
+            
+            if (rb2d.velocity.y == 0)
+            {
+                moveDirection.y = 0;
+            }
+        }
+        else if (rb2d.velocity.x > 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 0);
+            moveDirection.x = 1;
+
+            if (rb2d.velocity.y == 0)
+            {
+                moveDirection.y = 0;
+            }
         }
     }
 }
