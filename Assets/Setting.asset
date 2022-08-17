@@ -14,13 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapTiles:
   - name: Empty
+    icon: {fileID: 0}
     tilebase: {fileID: 11400000, guid: 473f0f8795381bc489cffe1a80f9f883, type: 2}
   - name: Ground
+    icon: {fileID: 0}
     tilebase: {fileID: 11400000, guid: 7c8a81a035b0d02458b827a268a50cd5, type: 2}
   mapItemTiles:
   - name: Empty
+    icon: {fileID: 21300000, guid: c80aa64698601db4d90504b121eeaee3, type: 3}
     tilebase: {fileID: 11400000, guid: 2fe9d797778887e4f856a4ea18771981, type: 2}
   - name: Rock
+    icon: {fileID: 21300000, guid: ffc726d0d9345be45a804d2a82c2aa77, type: 3}
     tilebase: {fileID: 11400000, guid: 70de932cff0d4304c9508b85b0da4467, type: 2}
   chunkSize: {x: 3, y: 3}
   loadMapSize: {x: 5, y: 5}

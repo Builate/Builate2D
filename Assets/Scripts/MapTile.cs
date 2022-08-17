@@ -8,5 +8,6 @@ using UnityEngine.Tilemaps;
 public struct MapTile
 {
     public string name;
+    public Sprite icon;
     public TileBase tilebase;
 }

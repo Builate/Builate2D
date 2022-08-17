@@ -8,13 +8,35 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     public float speed;
     public PlayerInventoryBox inventoryBox = new PlayerInventoryBox();
+    public InventorySlot[] inventorySlots = new InventorySlot[9]; 
     public int handIndex;
 
     void Start()
     {
-        for (int i = 0; i < 3; i++)
+        foreach (var item in inventorySlots)
         {
-            inventoryBox.AddItem(handIndex, 1);
+            item.onCkick = i =>
+            {
+                handIndex = i;
+            };
+        }
+
+        inventoryBox.onChange = () =>
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                if (inventoryBox.PeekItem(i, out int itemid, out int itemquantity))
+                {
+                    inventorySlots[i].SetIcon(itemid);
+                }
+            }
+        };
+
+
+        for (int i = 0; i < 300; i++)
+        {
+            inventoryBox.AddItem(0, 1);
+            inventoryBox.AddItem(6, 1);
         }
     }
 
@@ -33,13 +55,21 @@ public class PlayerController : MonoBehaviour
 
         animator.SetBool("isWalk", rb2d.velocity != Vector2.zero);
 
+        for (int i = 0; i < 9; i++)
+        {
+            inventorySlots[i].onSelect = i == handIndex;
+        }
+
 
         if (Input.GetMouseButton(0))
         {
-            Vector2Int cursorChunkPosition = GameManager.Instance.GetChunkPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2Int tilepos = GameManager.Instance.GetTilePosition(mousePos);
 
-            MapManager.Instance.FillChunk(cursorChunkPosition, 1);
-            MapManager.Instance.SetTilemap(cursorChunkPosition);
+            if (MapManager.Instance.map.TryGetValue(GameManager.Instance.GetChunkPosition(mousePos), out Chunk chunk))
+            {
+                MapManager.Instance.SetTile(mousePos, 1, 0);
+            }
         }
 
         if (Input.GetMouseButton(1))

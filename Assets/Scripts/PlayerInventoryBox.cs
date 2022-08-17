@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerInventoryBox : InventoryBox
 {
     public InventoryTile[] items = new InventoryTile[9];
+    public Action onChange;
 
     public override bool PeekItem(int index, out int itemid, out int itemquantity)
     {
@@ -36,6 +37,8 @@ public class PlayerInventoryBox : InventoryBox
         itemid = items[index].id;
 
         if (items[index].quantity == 0) items[index].id = 0;
+
+        onChange();
         return true;
     }
 
@@ -49,6 +52,8 @@ public class PlayerInventoryBox : InventoryBox
 
         items[index].quantity++;
         items[index].id = itemid;
+
+        onChange();
         return true;
     }
 }
