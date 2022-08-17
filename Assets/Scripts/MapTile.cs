@@ -10,4 +10,5 @@ public struct MapTile
     public string name;
     public Sprite icon;
     public TileBase tilebase;
+    public bool hasCollider;
 }
