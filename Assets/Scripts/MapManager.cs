@@ -23,7 +23,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
     }
 
     /// <summary>
-    /// ƒ`ƒƒƒ“ƒN‚ª‘¶İ‚µ‚È‚¯‚ê‚Î¶¬‚·‚é
+    /// ï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½İ‚ï¿½ï¿½È‚ï¿½ï¿½ï¿½Îï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     /// <param name="chunkPosition"></param>
     /// <param name="t"></param>
@@ -38,7 +38,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
     }
 
     /// <summary>
-    /// ƒ`ƒƒƒ“ƒN‚Ì‘¶İ‚ÉŠÖ‚í‚ç‚¸¶¬‚·‚é
+    /// ï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½Ì‘ï¿½ï¿½İ‚ÉŠÖ‚ï¿½ç‚¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     /// <param name="chunkPosition"></param>
     /// <param name="t"></param>
@@ -52,6 +52,9 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
             {
                 chunk.mapdata[x, y] = t;
                 chunk.mapitemdata[x, y] = 0;
+
+                chunk.mapBBD[x, y].data["damage"] = 0;
+                chunk.mapitemBBD[x, y].data["damage"] = 0;
             }
         }
 
@@ -62,7 +65,7 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
     }
 
     /// <summary>
-    /// w’è‚µ‚½ƒŒƒCƒ„[‚ÉƒuƒƒbƒN‚ğİ’u‚µ‚Ü‚·B
+    /// ï¿½wï¿½è‚µï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½Éƒuï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½İ’uï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
     /// </summary>
     /// <param name="pos"></param>
     /// <param name="layer"></param>
@@ -77,9 +80,11 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
         {
             case 0:
                 chunk.mapdata[tilePos.x, tilePos.y] = id;
+                chunk.mapBBD[tilePos.x, tilePos.y].data["damage"] = 0;
                 break;
             case 1:
                 chunk.mapitemdata[tilePos.x, tilePos.y] = id;
+                chunk.mapitemBBD[tilePos.x, tilePos.y].data["damage"] = 0;
                 break;
             default:
                 break;

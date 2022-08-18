@@ -43,7 +43,7 @@ public class Player : SingletonMonoBehaviour<Player>
             for (int x = 0; x < 3; x++)
             {
                 Vector2Int chunkPos = new Vector2Int(x - 3 / 2, y - 3 / 2);
-                MapManager.Instance.FillChunk(chunkPos, 1);
+                MapManager.Instance.GetMap(chunkPos, 1);
                 MapManager.Instance.SetTilemap(chunkPos);
             }
         }
@@ -166,12 +166,19 @@ public class Player : SingletonMonoBehaviour<Player>
         if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.L))
         {
             Vector2 mousePos = (Vector2)transform.position + cursorDirection;
+            Vector2Int _mousePos = GameManager.Instance.GetTilePosition(mousePos);
 
             if (elapsed > interval)
             {
                 if (MapManager.Instance.map.TryGetValue(GameManager.Instance.GetChunkPosition(mousePos), out Chunk chunk))
                 {
-                    MapManager.Instance.SetTile(mousePos, 1, 0);
+                    Debug.Log(chunk.mapitemBBD[_mousePos.x, _mousePos.y].GetInt("damage"));
+                    chunk.mapitemBBD[_mousePos.x, _mousePos.y].data["damage"] = chunk.mapitemBBD[_mousePos.x, _mousePos.y].GetInt("damage") + 1;
+
+                    if (chunk.mapitemBBD[_mousePos.x, _mousePos.y].GetInt("damage") >= GameManager.Instance.setting.mapItemTiles[chunk.mapitemdata[_mousePos.x, _mousePos.y]].durability) 
+                    {
+                        MapManager.Instance.SetTile(mousePos, 1, 0);
+                    }
                     elapsed = 0;
                 }
             }
