@@ -11,15 +11,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     void Start()
     {
-        try
-        {
-            SaveManager.Instance.Load();
-        }
-        catch (System.Exception ex)
-        {
-
-        }
-
         Vector2Int PlayerChunkPosition = GetChunkPosition(Player.transform.position);
 
         MapManager.Instance.GetMap(PlayerChunkPosition, 1);

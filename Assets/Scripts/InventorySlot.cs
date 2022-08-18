@@ -20,7 +20,14 @@ public class InventorySlot : MonoBehaviour
 
     public void SetIcon(int id)
     {
-        image.sprite = GameManager.Instance.setting.mapItemTiles[id].icon;
+        try
+        {
+            image.sprite = GameManager.Instance.setting.mapItemTiles[id].icon;
+        }
+        catch (Exception)
+        {
+            Debug.Log(id);
+        }
     }
 
     public void OnClick()

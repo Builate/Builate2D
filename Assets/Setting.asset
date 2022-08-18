@@ -51,3 +51,4 @@ MonoBehaviour:
     durability: 0
   chunkSize: {x: 3, y: 3}
   loadMapSize: {x: 5, y: 5}
+  mouseWheelSensi: 5

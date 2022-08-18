@@ -410,7 +410,7 @@ MonoBehaviour:
   - {fileID: 1620180265}
   - {fileID: 1624159100}
   - {fileID: 2048589760}
-  handIndex: 0
+  _handIndex: 0
   moveDirection: {x: 1, y: 0}
   cursorDirection: {x: 0, y: 0}
   interval: 0.3

@@ -9,8 +9,16 @@ public class Player : SingletonMonoBehaviour<Player>
     public GameObject TileCursor;
     public float speed;
     public PlayerInventoryBox inventoryBox = new PlayerInventoryBox();
-    public InventorySlot[] inventorySlots = new InventorySlot[9]; 
-    public int handIndex;
+    public InventorySlot[] inventorySlots = new InventorySlot[9];
+
+    public float _handIndex;
+    public int handIndex
+    {
+        get
+        {
+            return (int)_handIndex;
+        }
+    }
     public Vector2Int moveDirection;
     public Vector2Int cursorDirection;
     public float interval;
@@ -22,7 +30,7 @@ public class Player : SingletonMonoBehaviour<Player>
         {
             item.onCkick = i =>
             {
-                handIndex = i;
+                _handIndex = i;
             };
         }
 
@@ -210,5 +218,19 @@ public class Player : SingletonMonoBehaviour<Player>
                 }
             }
         }
+
+        // 持ち物変更
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            _handIndex++;
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            _handIndex--;
+        }
+        float mousewheel = Input.GetAxisRaw("Mouse ScrollWheel");
+        _handIndex += (mousewheel + 9) * GameManager.Instance.setting.mouseWheelSensi;
+
+        _handIndex %= 9;
     }
 }
