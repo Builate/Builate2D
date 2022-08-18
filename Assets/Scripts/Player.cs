@@ -13,6 +13,8 @@ public class Player : SingletonMonoBehaviour<Player>
     public int handIndex;
     public Vector2Int moveDirection;
     public Vector2Int cursorDirection;
+    public float interval;
+    public float elapsed;
 
     void Start()
     {
@@ -81,6 +83,12 @@ public class Player : SingletonMonoBehaviour<Player>
         if (Input.GetKeyDown(KeyCode.L) && Input.GetKey(KeyCode.LeftShift))
         {
             SaveManager.Instance.Load();
+        }
+
+        elapsed += Time.deltaTime;
+        if (elapsed > interval)
+        {
+            elapsed = interval + 1;
         }
     }
 
@@ -154,16 +162,22 @@ public class Player : SingletonMonoBehaviour<Player>
 
     public void PlayerInput()
     {
+        // 破壊
         if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.L))
         {
             Vector2 mousePos = (Vector2)transform.position + cursorDirection;
 
-            if (MapManager.Instance.map.TryGetValue(GameManager.Instance.GetChunkPosition(mousePos), out Chunk chunk))
+            if (elapsed > interval)
             {
-                MapManager.Instance.SetTile(mousePos, 1, 0);
+                if (MapManager.Instance.map.TryGetValue(GameManager.Instance.GetChunkPosition(mousePos), out Chunk chunk))
+                {
+                    MapManager.Instance.SetTile(mousePos, 1, 0);
+                    elapsed = 0;
+                }
             }
         }
 
+        // 設置
         if (Input.GetMouseButton(1) || Input.GetKey(KeyCode.K)) 
         {
             if (inventoryBox.PeekItem(handIndex, out int itemid, out int itemquantity))
