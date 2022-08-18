@@ -50,8 +50,8 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
         {
             for (int x = 0; x < setting.chunkSize.x; x++)
             {
-                chunk.mapdata[x, y].data["id"] = System.BitConverter.GetBytes(t);
-                chunk.mapitemdata[x, y].data["id"] = System.BitConverter.GetBytes(0);
+                chunk.mapdata[x, y] = t;
+                chunk.mapitemdata[x, y] = 0;
             }
         }
 
@@ -76,10 +76,10 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
         switch (layer)
         {
             case 0:
-                chunk.mapdata[tilePos.x, tilePos.y].data["id"] = System.BitConverter.GetBytes(id);
+                chunk.mapdata[tilePos.x, tilePos.y] = id;
                 break;
             case 1:
-                chunk.mapitemdata[tilePos.x, tilePos.y].data["id"] = System.BitConverter.GetBytes(id);
+                chunk.mapitemdata[tilePos.x, tilePos.y] = id;
                 break;
             default:
                 break;
@@ -102,20 +102,20 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
     public void SetTilemap(Vector2Int chunkPosition, Vector2Int tilePosition)
     {
         Vector3Int pos = new Vector3Int(tilePosition.x, tilePosition.y) + new Vector3Int(chunkPosition.x * setting.chunkSize.x, chunkPosition.y * setting.chunkSize.y);
-        mapTilemap.SetTile(pos, setting.mapTiles[System.BitConverter.ToInt32(map[chunkPosition].mapdata[tilePosition.x, tilePosition.y].data["id"])].tilebase);
-        int tileid = System.BitConverter.ToInt32(map[chunkPosition].mapitemdata[tilePosition.x, tilePosition.y].data["id"]);
+        mapTilemap.SetTile(pos, setting.mapTiles[map[chunkPosition].mapdata[tilePosition.x, tilePosition.y]].tilebase);
+        int tileid = map[chunkPosition].mapitemdata[tilePosition.x, tilePosition.y];
         mapItemTilemap.SetTile(pos, setting.mapItemTiles[tileid].tilebase);
     }
 
-    public bool PlaceTile(int itemid, Vector3 position)
+    public bool DestroyTile(int itemid, Vector3 position)
     {
         Vector2Int tilepos = GameManager.Instance.GetTilePosition(position);
 
         if (MapManager.Instance.map.TryGetValue(GameManager.Instance.GetChunkPosition(position), out Chunk chunk))
         {
-            if (System.BitConverter.ToInt32(chunk.mapitemdata[tilepos.x, tilepos.y].data["id"]) == 0) 
+            if (chunk.mapitemdata[tilepos.x, tilepos.y] == 0)
             {
-                if (System.BitConverter.ToInt32(chunk.mapdata[tilepos.x, tilepos.y].data["id"]) != 0) 
+                if (chunk.mapdata[tilepos.x, tilepos.y] != 0)
                 {
                     MapManager.Instance.SetTile(position, 1, itemid);
                     return true;

@@ -11,5 +11,4 @@ public struct MapTile
     public Sprite icon;
     public TileBase tilebase;
     public bool hasCollider;
-    public int Durability;
 }
