@@ -189,11 +189,14 @@ public class Player : SingletonMonoBehaviour<Player>
         {
             if (inventoryBox.PeekItem(handIndex, out int itemid, out int itemquantity))
             {
-                var tilepos = (Vector2)transform.position + cursorDirection;
-
-                if (MapManager.Instance.DestroyTile(itemid, tilepos))
+                if (GameManager.Instance.setting.mapItemTiles[itemid].canPlace)
                 {
-                    inventoryBox.GetItem(handIndex, out itemid);
+                    var tilepos = (Vector2)transform.position + cursorDirection;
+
+                    if (MapManager.Instance.DestroyTile(itemid, tilepos))
+                    {
+                        inventoryBox.GetItem(handIndex, out itemid);
+                    }
                 }
             }
         }
