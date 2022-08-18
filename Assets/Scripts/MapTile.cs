@@ -12,5 +12,6 @@ public struct MapTile
     public TileBase tilebase;
     public bool canPlace;
     public bool hasCollider;
+    public bool isPickaxe;
     public int durability;
 }

@@ -174,16 +174,22 @@ public class Player : SingletonMonoBehaviour<Player>
 
             if (elapsed > interval)
             {
-                if (MapManager.Instance.map.TryGetValue(GameManager.Instance.GetChunkPosition(mousePos), out Chunk chunk))
+                if (inventoryBox.PeekItem(handIndex, out int itemid, out int itemquantity))
                 {
-                    Debug.Log(chunk.mapitemBBD[_mousePos.x, _mousePos.y].GetInt("damage"));
-                    chunk.mapitemBBD[_mousePos.x, _mousePos.y].data["damage"] = chunk.mapitemBBD[_mousePos.x, _mousePos.y].GetInt("damage") + 1;
-
-                    if (chunk.mapitemBBD[_mousePos.x, _mousePos.y].GetInt("damage") >= GameManager.Instance.setting.mapItemTiles[chunk.mapitemdata[_mousePos.x, _mousePos.y]].durability) 
+                    if (GameManager.Instance.setting.mapItemTiles[itemid].isPickaxe)
                     {
-                        MapManager.Instance.SetTile(mousePos, 1, 0);
+                        if (MapManager.Instance.map.TryGetValue(GameManager.Instance.GetChunkPosition(mousePos), out Chunk chunk))
+                        {
+                            Debug.Log(chunk.mapitemBBD[_mousePos.x, _mousePos.y].GetInt("damage"));
+                            chunk.mapitemBBD[_mousePos.x, _mousePos.y].data["damage"] = chunk.mapitemBBD[_mousePos.x, _mousePos.y].GetInt("damage") + 1;
+
+                            if (chunk.mapitemBBD[_mousePos.x, _mousePos.y].GetInt("damage") >= GameManager.Instance.setting.mapItemTiles[chunk.mapitemdata[_mousePos.x, _mousePos.y]].durability) 
+                            {
+                                MapManager.Instance.SetTile(mousePos, 1, 0);
+                            }
+                            elapsed = 0;
+                        }
                     }
-                    elapsed = 0;
                 }
             }
         }
