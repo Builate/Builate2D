@@ -51,6 +51,10 @@ public class Player : SingletonMonoBehaviour<Player>
         {
             inventoryBox.AddItem(0, 1);
         }
+        for (int i = 0; i < 100; i++)
+        {
+            inventoryBox.AddItem(1, 2);
+        }
     }
 
     void Update()
