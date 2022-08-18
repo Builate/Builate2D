@@ -52,7 +52,6 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
             {
                 chunk.mapdata[x, y].data["id"] = System.BitConverter.GetBytes(t);
                 chunk.mapitemdata[x, y].data["id"] = System.BitConverter.GetBytes(0);
-                chunk.mapitemdata[x, y].data["damage"] = System.BitConverter.GetBytes(0);
             }
         }
 
@@ -81,7 +80,6 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
                 break;
             case 1:
                 chunk.mapitemdata[tilePos.x, tilePos.y].data["id"] = System.BitConverter.GetBytes(id);
-                chunk.mapitemdata[tilePos.x, tilePos.y].data["damage"] = System.BitConverter.GetBytes(0);
                 break;
             default:
                 break;
