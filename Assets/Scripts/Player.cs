@@ -156,13 +156,18 @@ public class Player : SingletonMonoBehaviour<Player>
         // ‰ó‚·•û
         if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.K))
         {
-            Vector2 mousePos = (Vector2)transform.position + cursorDirection;
+            Vector2 mousePos = Vector2Int.FloorToInt((Vector2)transform.position + cursorDirection);
 
             if (elapsed > interval)
             {
-                if (MapManager.Instance.map.TryGetValue(GameManager.Instance.GetChunkPosition(mousePos), out Chunk chunk))
+                if (MapManager.Instance.map.TryGetValue(GameManager.Instance.GetChunkPosition(mousePos), out Chunk chunk)) 
                 {
-                    MapManager.Instance.SetTile(mousePos, 1, 0);
+                    chunk.mapitemdata[Mathf.FloorToInt(mousePos.x), Mathf.FloorToInt(mousePos.y)].data["damage"] = System.BitConverter.GetBytes(System.BitConverter.ToInt32(chunk.mapitemdata[Mathf.FloorToInt(mousePos.x), Mathf.FloorToInt(mousePos.y)].data["damage"]) - 1);
+                    int id = System.BitConverter.ToInt32(chunk.mapitemdata[Mathf.FloorToInt(mousePos.x), Mathf.FloorToInt(mousePos.y)].data["id"]);
+                    if (System.BitConverter.ToInt32(chunk.mapitemdata[Mathf.FloorToInt(mousePos.x), Mathf.FloorToInt(mousePos.y)].data["damage"]) >= GameManager.Instance.setting.mapItemTiles[id].Durability) 
+                    {
+                        MapManager.Instance.SetTile(mousePos, 1, 0);
+                    }
                     elapsed = 0;
                 }
             }
@@ -178,7 +183,6 @@ public class Player : SingletonMonoBehaviour<Player>
                 if (MapManager.Instance.PlaceTile(itemid, tilepos))
                 {
                     inventoryBox.GetItem(handIndex, out itemid);
-
                 }
             }
         }
