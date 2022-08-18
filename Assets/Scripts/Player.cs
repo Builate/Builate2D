@@ -34,6 +34,21 @@ public class Player : SingletonMonoBehaviour<Player>
                 }
             }
         };
+
+
+        for (int y = 0; y < 3; y++)
+        {
+            for (int x = 0; x < 3; x++)
+            {
+                Vector2Int chunkPos = new Vector2Int(x - 3 / 2, y - 3 / 2);
+                MapManager.Instance.FillChunk(chunkPos, 1);
+                MapManager.Instance.SetTilemap(chunkPos);
+            }
+        }
+        for (int i = 0; i < 100; i++)
+        {
+            inventoryBox.AddItem(0, 1);
+        }
     }
 
     void Update()
@@ -58,7 +73,7 @@ public class Player : SingletonMonoBehaviour<Player>
         SetTileCursor();
 
 
-        // ƒfƒoƒbƒO
+        // ï¿½fï¿½oï¿½bï¿½O
         if (Input.GetKeyDown(KeyCode.P) && Input.GetKey(KeyCode.LeftShift))
         {
             SaveManager.Instance.Save();
@@ -116,7 +131,7 @@ public class Player : SingletonMonoBehaviour<Player>
         {
             Vector2Int pos = GameManager.Instance.GetTilePosition(transform.position);
 
-            //ƒRƒ‰ƒCƒ_[‚ğ‚Á‚Ä‚¢‚é‚È‚ç
+            //ï¿½Rï¿½ï¿½ï¿½Cï¿½_ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½È‚ï¿½
             if (GameManager.Instance.setting.mapItemTiles[chunk.mapitemdata[pos.x, pos.y]].hasCollider)
             {
                 cursorDirection = new Vector2Int(0, 0);
@@ -139,7 +154,7 @@ public class Player : SingletonMonoBehaviour<Player>
 
     public void PlayerInput()
     {
-        if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.K))
+        if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.L))
         {
             Vector2 mousePos = (Vector2)transform.position + cursorDirection;
 
@@ -149,7 +164,7 @@ public class Player : SingletonMonoBehaviour<Player>
             }
         }
 
-        if (Input.GetMouseButton(1) || Input.GetKey(KeyCode.L)) 
+        if (Input.GetMouseButton(1) || Input.GetKey(KeyCode.K)) 
         {
             if (inventoryBox.PeekItem(handIndex, out int itemid, out int itemquantity))
             {

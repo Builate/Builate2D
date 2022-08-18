@@ -11,7 +11,14 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     void Start()
     {
-        SaveManager.Instance.Load();
+        try
+        {
+            SaveManager.Instance.Load();
+        }
+        catch (System.Exception ex)
+        {
+
+        }
 
         Vector2Int PlayerChunkPosition = GetChunkPosition(Player.transform.position);
 
@@ -21,7 +28,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     void Update()
     {
-        // ‰½‚à‚È‚¢êŠ‚É‚à“–‚½‚è”»’è‚ğ•t‚¯‚é‚½‚ß‚É•K—v
+        // ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½êŠï¿½É‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è”»ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½é‚½ï¿½ß‚É•Kï¿½v
         if (GetChunkPosition(Player.transform.position) != l_playerpos)
         {
             Vector2Int PlayerChunkPosition = GetChunkPosition(Player.transform.position);
