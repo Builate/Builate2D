@@ -21,8 +21,8 @@ public class Chunk
         {
             for (int x = 0; x < MapManager.Instance.setting.chunkSize.x; x++)
             {
-                mapBBD[x, y].Init();
-                mapitemBBD[x, y].Init();
+                mapBBD[x, y] = new BBD();
+                mapitemBBD[x, y] = new BBD();
             }
         }
     }

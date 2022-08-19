@@ -175,7 +175,7 @@ public class Player : SingletonMonoBehaviour<Player>
     public void PlayerInput()
     {
         // 破壊
-        if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.L))
+        if (Input.GetMouseButton(0))
         {
             Vector2 mousePos = (Vector2)transform.position + cursorDirection;
             Vector2Int _mousePos = GameManager.Instance.GetTilePosition(mousePos);
@@ -203,7 +203,7 @@ public class Player : SingletonMonoBehaviour<Player>
         }
 
         // 設置
-        if (Input.GetMouseButton(1) || Input.GetKey(KeyCode.K)) 
+        if (Input.GetMouseButton(1)) 
         {
             if (inventoryBox.PeekItem(handIndex, out int itemid, out int itemquantity))
             {
@@ -220,15 +220,7 @@ public class Player : SingletonMonoBehaviour<Player>
         }
 
         // 持ち物変更
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            _handIndex++;
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            _handIndex--;
-        }
-        float mousewheel = Input.GetAxisRaw("Mouse ScrollWheel");
+        float mousewheel = -Input.GetAxisRaw("Mouse ScrollWheel");
         _handIndex += (mousewheel + 9) * GameManager.Instance.setting.mouseWheelSensi;
 
         _handIndex %= 9;
