@@ -167,17 +167,6 @@ public class Player : SingletonMonoBehaviour<Player>
             default:
                 break;
         }
-
-        if (MapManager.Instance.map.TryGetValue(GameManager.Instance.GetChunkPosition(transform.position), out Chunk chunk))
-        {
-            Vector2Int pos = GameManager.Instance.GetTilePosition(transform.position);
-
-            //�R���C�_�[�������Ă���Ȃ�
-            if (GameManager.Instance.setting.mapItemTiles[chunk.mapitemdata[pos.x, pos.y]].hasCollider)
-            {
-                cursorDirection = new Vector2Int(0, 0);
-            }
-        }
     }
 
     public void SetTileCursor()
