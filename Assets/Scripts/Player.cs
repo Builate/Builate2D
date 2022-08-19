@@ -20,7 +20,7 @@ public class Player : SingletonMonoBehaviour<Player>
         }
     }
     public Vector2Int moveDirection;
-    public Vector2Int cursorDirection;
+    public Vector2Int cursorPos;
     public float interval;
     public float elapsed;
 
@@ -145,33 +145,16 @@ public class Player : SingletonMonoBehaviour<Player>
 
     public void SetCursorDirection()
     {
-        float _angle = GetAngle(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        _angle += 45;
-        _angle = Mathf.Repeat(_angle, 360) / 90f;
-        int angle = Mathf.FloorToInt(_angle);
+        Vector2Int p = Vector2Int.FloorToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        Vector2Int playerPos = Vector2Int.FloorToInt(transform.position);
+        p = new Vector2Int(Mathf.Clamp(p.x, -1 + playerPos.x, 1 + playerPos.x), Mathf.Clamp(p.y, -1 + playerPos.y, 1 + playerPos.y));
 
-        switch (angle)
-        {
-            case 0:
-                cursorDirection = new Vector2Int(1, 0);
-                break;
-            case 1:
-                cursorDirection = new Vector2Int(0, 1);
-                break;
-            case 2:
-                cursorDirection = new Vector2Int(-1, 0);
-                break;
-            case 3:
-                cursorDirection = new Vector2Int(0, -1);
-                break;
-            default:
-                break;
-        }
+        cursorPos = p;
     }
 
     public void SetTileCursor()
     {
-        TileCursor.transform.position = Vector3Int.FloorToInt(transform.position) + (Vector3Int)cursorDirection + new Vector3(.5f, .5f);
+        TileCursor.transform.position = (Vector3Int)cursorPos + new Vector3(.5f, .5f);
     }
 
     public void UpdateInventorySlotsOnselect()
@@ -187,7 +170,7 @@ public class Player : SingletonMonoBehaviour<Player>
         // 破壊
         if (Input.GetMouseButton(0))
         {
-            Vector2 mousePos = (Vector2)transform.position + cursorDirection;
+            Vector2 mousePos = cursorPos;
             Vector2Int _mousePos = GameManager.Instance.GetTilePosition(mousePos);
 
             if (elapsed > interval)
@@ -219,7 +202,7 @@ public class Player : SingletonMonoBehaviour<Player>
             {
                 if (GameManager.Instance.setting.mapItemTiles[itemid].canPlace)
                 {
-                    var tilepos = (Vector2)transform.position + cursorDirection;
+                    Vector2 tilepos = cursorPos;
 
                     if (MapManager.Instance.DestroyTile(itemid, tilepos))
                     {
