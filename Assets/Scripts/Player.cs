@@ -145,7 +145,28 @@ public class Player : SingletonMonoBehaviour<Player>
 
     public void SetCursorDirection()
     {
-        cursorDirection = moveDirection;
+        float _angle = GetAngle(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        _angle += 45;
+        _angle = Mathf.Repeat(_angle, 360) / 90f;
+        int angle = Mathf.FloorToInt(_angle);
+
+        switch (angle)
+        {
+            case 0:
+                cursorDirection = new Vector2Int(1, 0);
+                break;
+            case 1:
+                cursorDirection = new Vector2Int(0, 1);
+                break;
+            case 2:
+                cursorDirection = new Vector2Int(-1, 0);
+                break;
+            case 3:
+                cursorDirection = new Vector2Int(0, -1);
+                break;
+            default:
+                break;
+        }
 
         if (MapManager.Instance.map.TryGetValue(GameManager.Instance.GetChunkPosition(transform.position), out Chunk chunk))
         {
@@ -224,5 +245,14 @@ public class Player : SingletonMonoBehaviour<Player>
         _handIndex += (mousewheel + 9) * GameManager.Instance.setting.mouseWheelSensi;
 
         _handIndex %= 9;
+    }
+
+    float GetAngle(Vector2 start, Vector2 target)
+    {
+        Vector2 dt = target - start;
+        float rad = Mathf.Atan2(dt.y, dt.x);
+        float degree = rad * Mathf.Rad2Deg;
+
+        return degree;
     }
 }
