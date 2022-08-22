@@ -4,5 +4,6 @@ using UnityEngine;
 
 public struct Block
 {
-    public int id;
+    public int ID;
+    public int Damage;
 }

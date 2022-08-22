@@ -181,15 +181,12 @@ public class Player : SingletonMonoBehaviour<Player>
                     {
                         if (MapManager.Instance.map.TryGetValue(GameManager.Instance.GetChunkPosition(mousePos), out Chunk chunk))
                         {
-                            /*
-                            Debug.Log(chunk.mapitemBBD[_mousePos.x, _mousePos.y].GetInt("damage"));
-                            chunk.mapitemBBD[_mousePos.x, _mousePos.y].data["damage"] = chunk.mapitemBBD[_mousePos.x, _mousePos.y].GetInt("damage") + 1;
+                            chunk.mapitemdata[_mousePos.x, _mousePos.y].Damage++;
 
-                            if (chunk.mapitemBBD[_mousePos.x, _mousePos.y].GetInt("damage") >= GameManager.Instance.setting.mapItemTiles[chunk.mapitemdata[_mousePos.x, _mousePos.y]].durability) 
+                            if (chunk.mapitemdata[_mousePos.x, _mousePos.y].Damage >= GameManager.Instance.setting.mapItemTiles[chunk.mapitemdata[_mousePos.x,_mousePos.y].ID].durability)
                             {
                                 MapManager.Instance.SetTile(mousePos, 1, 0);
                             }
-                            */
                             elapsed = 0;
                         }
                     }

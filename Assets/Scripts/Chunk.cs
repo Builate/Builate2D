@@ -24,8 +24,8 @@ public class Chunk
         {
             for (int x = 0; x < GameManager.Instance.setting.chunkSize.x; x++)
             {
-                dataWriter.Put(mapdata[x, y].id);
-                dataWriter.Put(mapitemdata[x, y].id);
+                dataWriter.Put(mapdata[x, y].ID);
+                dataWriter.Put(mapitemdata[x, y].ID);
             }
         }
     }
@@ -38,8 +38,8 @@ public class Chunk
         {
             for (int x = 0; x < GameManager.Instance.setting.chunkSize.x; x++)
             {
-                mapdata[x, y].id = dataReader.GetInt();
-                mapitemdata[x, y].id = dataReader.GetInt();
+                mapdata[x, y].ID = dataReader.GetInt();
+                mapitemdata[x, y].ID = dataReader.GetInt();
             }
         }
     }
