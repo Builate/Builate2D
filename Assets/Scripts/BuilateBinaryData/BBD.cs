@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
 public class BBD
 {
     public Dictionary<string, object> data = new Dictionary<string, object>();
@@ -12,3 +13,4 @@ public class BBD
         return (int)data[id];
     }
 }
+*/

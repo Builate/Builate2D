@@ -181,6 +181,7 @@ public class Player : SingletonMonoBehaviour<Player>
                     {
                         if (MapManager.Instance.map.TryGetValue(GameManager.Instance.GetChunkPosition(mousePos), out Chunk chunk))
                         {
+                            /*
                             Debug.Log(chunk.mapitemBBD[_mousePos.x, _mousePos.y].GetInt("damage"));
                             chunk.mapitemBBD[_mousePos.x, _mousePos.y].data["damage"] = chunk.mapitemBBD[_mousePos.x, _mousePos.y].GetInt("damage") + 1;
 
@@ -188,6 +189,7 @@ public class Player : SingletonMonoBehaviour<Player>
                             {
                                 MapManager.Instance.SetTile(mousePos, 1, 0);
                             }
+                            */
                             elapsed = 0;
                         }
                     }

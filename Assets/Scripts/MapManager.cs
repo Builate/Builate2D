@@ -50,11 +50,13 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
         {
             for (int x = 0; x < setting.chunkSize.x; x++)
             {
-                chunk.mapdata[x, y] = t;
-                chunk.mapitemdata[x, y] = 0;
+                chunk.mapdata[x, y].id = t;
+                chunk.mapitemdata[x, y].id = 0;
 
+                /*
                 chunk.mapBBD[x, y].data["damage"] = 0;
                 chunk.mapitemBBD[x, y].data["damage"] = 0;
+                */
             }
         }
 
@@ -79,12 +81,12 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
         switch (layer)
         {
             case 0:
-                chunk.mapdata[tilePos.x, tilePos.y] = id;
-                chunk.mapBBD[tilePos.x, tilePos.y].data["damage"] = 0;
+                chunk.mapdata[tilePos.x, tilePos.y].id = id;
+//                chunk.mapBBD[tilePos.x, tilePos.y].data["damage"] = 0;
                 break;
             case 1:
-                chunk.mapitemdata[tilePos.x, tilePos.y] = id;
-                chunk.mapitemBBD[tilePos.x, tilePos.y].data["damage"] = 0;
+                chunk.mapitemdata[tilePos.x, tilePos.y].id = id;
+//                chunk.mapitemBBD[tilePos.x, tilePos.y].data["damage"] = 0;
                 break;
             default:
                 break;
@@ -107,8 +109,8 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
     public void SetTilemap(Vector2Int chunkPosition, Vector2Int tilePosition)
     {
         Vector3Int pos = new Vector3Int(tilePosition.x, tilePosition.y) + new Vector3Int(chunkPosition.x * setting.chunkSize.x, chunkPosition.y * setting.chunkSize.y);
-        mapTilemap.SetTile(pos, setting.mapTiles[map[chunkPosition].mapdata[tilePosition.x, tilePosition.y]].tilebase);
-        int tileid = map[chunkPosition].mapitemdata[tilePosition.x, tilePosition.y];
+        mapTilemap.SetTile(pos, setting.mapTiles[map[chunkPosition].mapdata[tilePosition.x, tilePosition.y].id].tilebase);
+        int tileid = map[chunkPosition].mapitemdata[tilePosition.x, tilePosition.y].id;
         mapItemTilemap.SetTile(pos, setting.mapItemTiles[tileid].tilebase);
     }
 
@@ -118,9 +120,9 @@ public class MapManager : SingletonMonoBehaviour<MapManager>
 
         if (MapManager.Instance.map.TryGetValue(GameManager.Instance.GetChunkPosition(position), out Chunk chunk))
         {
-            if (chunk.mapitemdata[tilepos.x, tilepos.y] == 0)
+            if (chunk.mapitemdata[tilepos.x, tilepos.y].id == 0)
             {
-                if (chunk.mapdata[tilepos.x, tilepos.y] != 0)
+                if (chunk.mapdata[tilepos.x, tilepos.y].id != 0)
                 {
                     MapManager.Instance.SetTile(position, 1, itemid);
                     return true;
