@@ -6,4 +6,6 @@ public struct Block
 {
     public int ID;
     public int Damage;
+
+    public MetaData Data;
 }

@@ -11,6 +11,15 @@ public class Chunk
     {
         mapdata = new Block[MapManager.Instance.setting.chunkSize.x, MapManager.Instance.setting.chunkSize.y];
         mapitemdata = new Block[MapManager.Instance.setting.chunkSize.x, MapManager.Instance.setting.chunkSize.y];
+
+        for (int y = 0; y < MapManager.Instance.setting.chunkSize.y; y++)
+        {
+            for (int x = 0; x < MapManager.Instance.setting.chunkSize.x; x++)
+            {
+//                mapdata[x, y] = new Block();
+//                mapitemdata[x,y] = new Block();
+            }
+        }
     }
 
     public Chunk()
